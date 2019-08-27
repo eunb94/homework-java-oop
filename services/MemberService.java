@@ -66,8 +66,82 @@ public class MemberService {
 			return msg;
 		}
 		/**
-		 * 5. 아이디 중복 체크
+		 * 4.회원탈퇴
 		 * */
+		
+			/**
+			 * 5. 회원목록
+			 * */
+		public String list(MemberBean param) {
+			String msg = "";
+			for(int i=0; i<count; i++) {
+				msg += members[i].toString()+ ", \n";
+			}
+			return msg;
+									
+		}
+		
+		/**
+		 * 6. 아이디 검색
+		 * */
+			public MemberBean findById(String id){
+				MemberBean member = new MemberBean();
+				for(int i=0; i<count; i++) {
+					if(id.equals(members[i].getId())) {
+						member = members[i];	
+					break;
+					}
+				}
+				return member;	
+			
+		}
+		
+		/**
+		 *7. 이름 검색
+		 * */
+		public MemberBean[] findByName(String name) {	
+			int j = 0;
+			for(int i=0; i<count; i++) {
+			if(name.equals(this.members[i].getName())) {
+				j++;
+			}
+			}
+			
+			MemberBean[] members = new MemberBean[j];
+			
+			for(int i=0; i<count; i++) {					
+				if(name.equals(this.members[i].getName())) {
+						members[j] = this.members[i];}
+				j++;
+				if(members.length == j) {
+					break;
+				}
+			}
+			return members;
+		}
+		/**
+		 * 8.로그인
+		 * */
+		public String login(MemberBean param) {
+			String msg = "로그인 실패";
+			
+			String id = param.getId();
+			String pas = param.getPas();
+			
+			for(int i=0; i<count; i++) {
+				if(id.equals(members[i].getId())&&pas.equals(members[i].getPas())) {
+					msg = "로그인 성공";
+					
+					break;
+				}
+				}
+						
+				return msg;
+		}
+		/**
+		 * 9. 아이디 중복체크
+		 * */
+		
 		public String findById(MemberBean param) {
 			String result = "사용 가능한 아이디 입니다.";
 			String id = param.getId();
@@ -79,9 +153,18 @@ public class MemberService {
 				
 			}
 			return result;
-			
-		}
+}
 		
-	}
-	 
 
+		/**
+		 * 10. 전체 회원 수
+		 * */
+	public String countAll(MemberBean param) {
+		int total = 0;
+		for (int i=0; i<count; i++) {
+		
+		}
+	return "총 회원 수 : " + count;
+		}
+	}
+	

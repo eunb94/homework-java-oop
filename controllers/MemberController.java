@@ -61,7 +61,7 @@ public class MemberController {
 				break;
 				
 			case "5" :
-				
+				JOptionPane.showMessageDialog(null, service.list(member));
 				
 				break;
 				
@@ -73,12 +73,32 @@ public class MemberController {
 				break;
 				
 			case "7" :
+				String searchName = JOptionPane.showInputDialog("이름 검색");
+				//member = service.findByName(searchName);
+				JOptionPane.showMessageDialog(null, member);
 				
 				break;
+				
 			case "8" :
+				String loginValue = JOptionPane.showInputDialog("로그인 ID, PW");
+				String[] loginValues = loginValue.split(",");
+				String loginId = loginValues[0];
+				String loginpas = loginValues[1];
+				member = new MemberBean();
+				member.setId(loginId);
+				member.setPas(loginpas);
+				String msg = service.login(member);
+				JOptionPane.showMessageDialog(null, msg);
 				
 				break;
+				
+			case "9" :
+				JOptionPane.showMessageDialog(null, service.findById(member));
+				
+				break;
+				
 			case "10" :
+				JOptionPane.showMessageDialog(null, service.countAll(member));
 				
 				break;
 
